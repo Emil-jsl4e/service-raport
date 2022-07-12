@@ -79,10 +79,20 @@ export class AuthController {
 
     const {id} = await this.jwtService.verifyAsync(cookie);
 
-    const user = await this.userService.findOne({where:{id}});
-
-    return user;
+    return await this.userService.findOne({where:{id}});
 
   }
+
+  @Post('admin/logout')
+  async logout(
+    @Res({passthrough: true}) response: Response,
+  ){
+    response.clearCookie('jwt');
+
+    return {
+      message: 'success',
+    }
+  }
+
 
 }

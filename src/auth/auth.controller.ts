@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Post } from "@nestjs/common";
+import { BadRequestException, Body, Controller, NotFoundException, Post } from "@nestjs/common";
 import { RegisterDto } from "./dto/register.dto";
 import { UserService } from "../user/user.service";
 import * as bcrypt from 'bcryptjs';
@@ -25,4 +25,24 @@ export class AuthController {
       isServisant: false,
     });
   }
+
+  @Post('admin/login')
+  async login(
+    @Body('email') email:string,
+    @Body('password') password:string,
+    )
+  {
+    const user = await this.userService.findOne({where: {email}});
+
+    if(!user) {
+      throw new NotFoundException('User is not found');
+    }
+
+    if(!await bcrypt.compare(password, user.password)){
+      throw new BadRequestException('Password is invalid');
+    }
+
+    return user;
+  }
+
 }

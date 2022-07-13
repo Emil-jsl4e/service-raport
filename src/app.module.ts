@@ -5,6 +5,9 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { UserModule } from './user/user.module';
 import { User } from "./user/user";
 import { AuthModule } from "./auth/auth.module";
+import { SparePartsModule } from './spare-parts/spare-parts.module';
+import { spareParts } from "./spare-parts/spare-parts";
+import { ServiceOrdersModule } from './service-orders/service-orders.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -14,11 +17,11 @@ import { AuthModule } from "./auth/auth.module";
     username: 'root',
     password: '',
     database: 'service',
-    entities: [User],
+    entities: [User, spareParts],
     bigNumberStrings: false,
     logging: true,
     synchronize: true,
-  }), UserModule,AuthModule,],
+  }), UserModule,AuthModule, SparePartsModule, ServiceOrdersModule,],
   controllers: [AppController],
   providers: [AppService],
 })

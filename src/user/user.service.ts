@@ -22,4 +22,5 @@ export class UserService {
   async update(id: number, options){
     return this.userRepository.update(id, options);
   }
+
 }

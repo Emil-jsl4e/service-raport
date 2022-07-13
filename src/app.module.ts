@@ -8,6 +8,8 @@ import { AuthModule } from "./auth/auth.module";
 import { SparePartsModule } from './spare-parts/spare-parts.module';
 import { spareParts } from "./spare-parts/spare-parts";
 import { ServiceOrdersModule } from './service-orders/service-orders.module';
+import { ServiceOrderActivate } from "./service-orders/serviceOrder-activate";
+import { ServiceOrders } from "./service-orders/serviceOrders";
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -17,7 +19,7 @@ import { ServiceOrdersModule } from './service-orders/service-orders.module';
     username: 'root',
     password: '',
     database: 'service',
-    entities: [User, spareParts],
+    entities: [User, spareParts,ServiceOrderActivate, ServiceOrders],
     bigNumberStrings: false,
     logging: true,
     synchronize: true,

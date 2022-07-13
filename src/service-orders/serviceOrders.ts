@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { ServiceOrderActivate } from "./serviceOrder-activate";
 
 @Entity('serviceOrders')
 export class ServiceOrders {
@@ -10,4 +11,6 @@ export class ServiceOrders {
   description: string;
   @Column({default: false})
   complete: boolean;
+  @OneToMany(() => ServiceOrderActivate, ServiceOrderActivate => ServiceOrderActivate.serviceOrders)
+  serviceOrderActivate: ServiceOrderActivate[];
 }

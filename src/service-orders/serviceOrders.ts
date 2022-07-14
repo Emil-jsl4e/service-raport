@@ -1,7 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { ServiceOrderActivate } from "./serviceOrder-activate";
 
-@Entity('serviceOrders')
+@Entity()
 export class ServiceOrders {
   @PrimaryGeneratedColumn()
   id: number;

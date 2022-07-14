@@ -19,7 +19,7 @@ import { ServiceOrders } from "./service-orders/serviceOrders";
     username: 'root',
     password: '',
     database: 'service',
-    entities: [User, spareParts,ServiceOrderActivate, ServiceOrders],
+    entities: [User, spareParts, ServiceOrders, ServiceOrderActivate],
     bigNumberStrings: false,
     logging: true,
     synchronize: true,

@@ -1,7 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { ServiceOrders } from "./serviceOrders";
 
-@Entity('serviceOrder_activate')
+@Entity()
 export class ServiceOrderActivate{
   @PrimaryGeneratedColumn()
   id: number;
@@ -12,5 +12,4 @@ export class ServiceOrderActivate{
   @ManyToOne(() => ServiceOrders, serviceOrders => serviceOrders.serviceOrderActivate)
   @JoinColumn({name: 'serviceOrdersId'})
   serviceOrders: ServiceOrders;
-
 }

@@ -8,7 +8,8 @@ import { ServiceOrderActivateService } from "./serviceOrder-activate.service";
 import { ServiceOrdersActivateController } from "./service-orders-activate.controller";
 
 @Module({
-  imports:[TypeOrmModule.forFeature([ServiceOrderActivate, ServiceOrders])
+  imports:[TypeOrmModule.forFeature([ServiceOrderActivate, ServiceOrders],
+    ),
   ],
   controllers: [ServiceOrdersController, ServiceOrdersActivateController],
   providers: [ServiceOrdersService, ServiceOrderActivateService],

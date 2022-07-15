@@ -11,6 +11,6 @@ export class ServiceOrders {
   description: string;
   @Column({default: false})
   complete: boolean;
-  @OneToMany(() => ServiceOrderActivate, ServiceOrderActivate => ServiceOrderActivate.serviceOrders)
+  @OneToMany(() => ServiceOrderActivate, serviceOrderActivate => serviceOrderActivate.serviceOrders)
   serviceOrderActivate: ServiceOrderActivate[];
 }

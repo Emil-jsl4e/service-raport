@@ -15,7 +15,6 @@ import { UserService } from "../user/user.service";
 import * as bcrypt from 'bcryptjs';
 import { JwtService } from "@nestjs/jwt";
 import { Request, Response } from "express";
-import * as http from "http";
 
 @Controller()
 @UseInterceptors(ClassSerializerInterceptor)
@@ -23,13 +22,21 @@ export class AuthController {
 
   constructor(
     private userService: UserService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
   ) {
   }
 
   @Post('admin/register')
-  async register(@Body() body: RegisterDto){
+  async register(
+    @Body() body: RegisterDto,
+    @Body('email') email: string,){
     const {passwordConfirm, ...data} = body;
+
+    const user = await this.userService.findOne({where: {email}});
+
+    if(user) {
+      throw new NotFoundException('Email is use! Try new email!');
+    }
 
     if (body.password !== body.passwordConfirm) {
       throw new BadRequestException('Password do not match!');
@@ -69,19 +76,22 @@ export class AuthController {
     response.cookie('jwt', jwt, {httpOnly: true});
 
     return {
-      message: 'soccess',
+      message: 'success',
     };
   }
 
   @Get('admin/user')
   async user(@Req() request: Request){
     const cookie = request.cookies['jwt'];
+    try {
+      const {id} = await this.jwtService.verifyAsync(cookie);
 
-    const {id} = await this.jwtService.verifyAsync(cookie);
+      return await this.userService.find({where:{id}});
 
-    return await this.userService.findOne({where:{id}});
-
-  }
+    } catch (e) {
+      throw new BadRequestException(`You must be logged. Error message: ${e.message}`);
+    }
+  };
 
   @Post('admin/logout')
   async logout(
@@ -101,8 +111,9 @@ export class AuthController {
       @Body('lastName') lastName: string,
       @Body('email') email: string,
     ){
-    const cookie = request.cookies['jwt'];
 
+    const cookie = request.cookies['jwt'];
+    try{
     const {id} = await this.jwtService.verifyAsync(cookie);
 
     await this.userService.update(id, {
@@ -111,6 +122,10 @@ export class AuthController {
       email,
     })
     return this.userService.findOne({where:{id}})
+
+    } catch (e) {
+    throw new BadRequestException(`You must be logged. Error message: ${e.message}`)
+  }
   }
 
   @Put('admin/users/password')
@@ -122,7 +137,7 @@ export class AuthController {
     if (password !== passwordConfirm) {
       throw new BadRequestException('Password do not match!');
     }
-
+    try {
     const cookie = request.cookies['jwt'];
 
     const {id} = await this.jwtService.verifyAsync(cookie);
@@ -131,6 +146,9 @@ export class AuthController {
       password: await bcrypt.hash(password, 12)
     })
     return this.userService.findOne({where:{id}})
+  } catch (e) {
+    throw new BadRequestException(`You must be logged. Error message: ${e.message}`)
+  }
   }
 
 }

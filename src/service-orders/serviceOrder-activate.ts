@@ -6,7 +6,9 @@ export class ServiceOrderActivate{
   @PrimaryGeneratedColumn()
   id: number;
   @Column()
-  orderTitle: string;
+  servisantFirstName: string;
+  @Column()
+  servisantLastName: string;
   @Column()
   description: string;
   @ManyToOne(() => ServiceOrders, serviceOrders => serviceOrders.serviceOrderActivate)

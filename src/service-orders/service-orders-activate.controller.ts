@@ -16,10 +16,11 @@ export class ServiceOrdersActivateController {
 
      @Post('admin/ordersActive')
      async register(@Body() body: ServiceOrderActivate){
-     const {orderTitle, description, serviceOrders } = body;
+     const {servisantFirstName, servisantLastName, description, serviceOrders } = body;
 
      return this.serviceOrderActivate.save({
-       orderTitle: orderTitle,
+       servisantFirstName: servisantFirstName,
+       servisantLastName: servisantLastName,
        description: description,
        serviceOrders: serviceOrders,
     });

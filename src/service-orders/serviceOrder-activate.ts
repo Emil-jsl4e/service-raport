@@ -3,8 +3,8 @@ import { ServiceOrders } from "./serviceOrders";
 
 @Entity()
 export class ServiceOrderActivate{
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
   @Column()
   servisantFirstName: string;
   @Column()

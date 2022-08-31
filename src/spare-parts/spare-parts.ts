@@ -1,11 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class spareParts {
   @PrimaryGeneratedColumn('uuid')
-  id:string;
+  id: string;
   @Column()
-  title:string;
+  title: string;
   @Column()
   description: string;
 }

@@ -1,8 +1,14 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { ServiceOrders } from "./serviceOrders";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { ServiceOrders } from './serviceOrders';
 
 @Entity()
-export class ServiceOrderActivate{
+export class ServiceOrderActivate {
   @PrimaryGeneratedColumn('uuid')
   id: string;
   @Column()
@@ -11,7 +17,10 @@ export class ServiceOrderActivate{
   servisantLastName: string;
   @Column()
   description: string;
-  @ManyToOne(() => ServiceOrders, serviceOrders => serviceOrders.serviceOrderActivate)
-  @JoinColumn({name: 'serviceOrdersId'})
+  @ManyToOne(
+    () => ServiceOrders,
+    (serviceOrders) => serviceOrders.serviceOrderActivate,
+  )
+  @JoinColumn({ name: 'serviceOrdersId' })
   serviceOrders: ServiceOrders;
 }

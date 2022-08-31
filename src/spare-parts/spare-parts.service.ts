@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from "@nestjs/typeorm";
-import { spareParts } from "./spare-parts";
-import { Repository } from "typeorm";
+import { InjectRepository } from '@nestjs/typeorm';
+import { spareParts } from './spare-parts';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class SparePartsService {
   constructor(
-    @InjectRepository(spareParts) private readonly sparePartsRepository: Repository<spareParts>
-  ) {
-  }
+    @InjectRepository(spareParts)
+    private readonly sparePartsRepository: Repository<spareParts>,
+  ) {}
   async save(options) {
     return this.sparePartsRepository.save(options);
   }
@@ -18,7 +18,7 @@ export class SparePartsService {
   async findOne(options) {
     return this.sparePartsRepository.findOne(options);
   }
-  async update(id: number, options){
+  async update(id: number, options) {
     return this.sparePartsRepository.update(id, options);
   }
   async delete(id: number) {

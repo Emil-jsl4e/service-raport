@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { Exclude } from 'class-transformer';
 
 @Entity('users')
@@ -9,11 +9,11 @@ export class User {
   firstName: string;
   @Column()
   lastName: string;
-  @Column({unique:true})
+  @Column({ unique: true })
   email: string;
   @Exclude()
   @Column()
   password: string;
-  @Column({default: true})
+  @Column({ default: true })
   isServisant: boolean;
 }

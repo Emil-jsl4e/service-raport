@@ -1,16 +1,19 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { ServiceOrderActivate } from "./serviceOrder-activate";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { ServiceOrderActivate } from './serviceOrder-activate';
 
 @Entity()
 export class ServiceOrders {
   @PrimaryGeneratedColumn('uuid')
   id: string;
   @Column()
-  title:string;
+  title: string;
   @Column()
   description: string;
-  @Column({default: false})
+  @Column({ default: false })
   complete: boolean;
-  @OneToMany(() => ServiceOrderActivate, serviceOrderActivate => serviceOrderActivate.serviceOrders)
+  @OneToMany(
+    () => ServiceOrderActivate,
+    (serviceOrderActivate) => serviceOrderActivate.serviceOrders,
+  )
   serviceOrderActivate: ServiceOrderActivate[];
 }

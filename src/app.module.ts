@@ -1,29 +1,35 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TypeOrmModule } from "@nestjs/typeorm";
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
-import { User } from "./user/user";
-import { AuthModule } from "./auth/auth.module";
+import { User } from './user/user';
+import { AuthModule } from './auth/auth.module';
 import { SparePartsModule } from './spare-parts/spare-parts.module';
-import { spareParts } from "./spare-parts/spare-parts";
+import { spareParts } from './spare-parts/spare-parts';
 import { ServiceOrdersModule } from './service-orders/service-orders.module';
-import { ServiceOrderActivate } from "./service-orders/serviceOrder-activate";
-import { ServiceOrders } from "./service-orders/serviceOrders";
+import { ServiceOrderActivate } from './service-orders/serviceOrder-activate';
+import { ServiceOrders } from './service-orders/serviceOrders';
 
 @Module({
-  imports: [TypeOrmModule.forRoot({
-    type: 'mysql',
-    host: 'localhost',
-    port: 3306,
-    username: 'root',
-    password: '',
-    database: 'service',
-    entities: [User, spareParts, ServiceOrders, ServiceOrderActivate],
-    bigNumberStrings: false,
-    logging: true,
-    synchronize: true,
-  }), UserModule,AuthModule, SparePartsModule, ServiceOrdersModule,],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: '',
+      database: 'service',
+      entities: [User, spareParts, ServiceOrders, ServiceOrderActivate],
+      bigNumberStrings: false,
+      logging: true,
+      synchronize: true,
+    }),
+    UserModule,
+    AuthModule,
+    SparePartsModule,
+    ServiceOrdersModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

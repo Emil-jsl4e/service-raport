@@ -92,6 +92,7 @@ export class AuthController {
     }
   }
 
+  @UseGuards(AuthGuard)
   @Post('admin/logout')
   async logout(@Res({ passthrough: true }) response: Response) {
     response.clearCookie('jwt');
@@ -101,6 +102,7 @@ export class AuthController {
     };
   }
 
+  @UseGuards(AuthGuard)
   @Put('admin/users/info')
   async updateInfo(
     @Req() request: Request,
@@ -125,6 +127,7 @@ export class AuthController {
     }
   }
 
+  @UseGuards(AuthGuard)
   @Put('admin/users/password')
   async updatePassword(
     @Req() request: Request,
